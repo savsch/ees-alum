@@ -1,0 +1,13 @@
+<svg width="800px" height="600px" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="600" fill="black"/>
+    <g stroke="white" stroke-width="2">
+        <path d="M100 100 H300 V300 H500" />
+        <path d="M150 200 H250 V400 H450" />
+        <circle cx="100" cy="100" r="5" fill="cyan" />
+        <circle cx="300" cy="100" r="5" fill="cyan" />
+        <circle cx="500" cy="300" r="5" fill="cyan" />
+        <circle cx="150" cy="200" r="5" fill="cyan" />
+        <circle cx="250" cy="200" r="5" fill="cyan" />
+        <circle cx="450" cy="400" r="5" fill="cyan" />
+    </g>
+</svg>

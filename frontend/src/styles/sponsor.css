@@ -1,0 +1,90 @@
+.slider-section {
+    background-color:transparent;
+    color: #80d8ff;
+    padding: 50px 20px;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .slider-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .logo-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .logo-track {
+    display: flex;
+    width: max-content;
+    animation: scrollLeft 40s linear infinite;
+  }
+  
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  
+  .logo-slider:hover .logo-track {
+    animation-play-state: paused;
+  }
+  
+  .logo-item {
+    flex: 0 0 auto;
+    width: 220px;
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .logo-item img {
+    max-width: 100%;
+    max-height: 140px;
+    object-fit: contain;
+    filter: grayscale(0) brightness(1);
+  }
+  
+  .logo-item:hover {
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    .logo-item {
+      width: 170px;
+      margin: 0 18px;
+    }
+  
+    .logo-item img {
+      max-height: 110px;
+    }
+  
+    .slider-section h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-item {
+      width: 140px;
+      margin: 0 12px;
+    }
+  
+    .logo-item img {
+      max-height: 90px;
+    }
+  
+    .slider-section h2 {
+      font-size: 1.5rem;
+    }
+  }
+  

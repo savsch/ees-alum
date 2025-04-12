@@ -1,0 +1,206 @@
+/* ======= Navbar Container ======= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2vw;
+    border-bottom: 3px solid #00eaff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    position: relative;
+    z-index: 1000;
+    background: #0b0b0b;
+  }
+  
+  /* Logo & Title */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  
+  .logo:hover {
+    transform: scale(1.05);
+  }
+  
+  .nav-title {
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
+    color: white;
+    margin-left: 0.8rem;
+    font-weight: bold;
+  }
+  
+  /* Desktop Navigation Links */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-left: 23rem;
+  }
+  
+  .nav-links li {
+    display: inline;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    position: relative;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #00eaff;
+    transition: width 0.3s;
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  
+  .nav-links a:hover {
+    color: #00eaff;
+  }
+  
+  /* Profile Icon */
+  .profile-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  /* Dropdown */
+  .profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 2vw;
+    background: white;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 160px;
+    z-index: 999;
+  }
+  
+  .profile-dropdown p {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+  }
+  
+  .profile-dropdown p:hover {
+    background: #f1f1f1;
+  }
+  
+  /* ===== Hamburger (Mobile Toggle) ===== */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+  
+  .menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background-color: white;
+  }
+  
+  /* ===== Mobile Menu ===== */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 2vw;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 999;
+    width: 200px;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .mobile-menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+  
+  .mobile-menu a:hover {
+    color: #00eaff;
+  }
+  
+  /* Show dropdown when active */
+  .mobile-menu.active {
+    display: flex;
+  }
+  
+  /* ===== Responsive Rules ===== */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+  
+    .menu-toggle {
+      display: flex;
+    }
+  
+    .profile-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+  }
+  
+  /* Optional Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+
+  .nav-links a.active,
+.mobile-menu a.active {
+  color: #00eaff;
+  font-weight: bold;
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}

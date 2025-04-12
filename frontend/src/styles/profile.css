@@ -1,0 +1,250 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  color: #111827;
+}
+
+/* Top Navigation Bar
+.navbar {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 16px 32px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+} */
+
+/* .navbar h1 {
+  font-size: 22px;
+  color: #6366f1;
+  margin: 0;
+  font-weight: 600;
+} */
+
+/* Wrapper Layout */
+.profile-wrapper {
+  display: flex;
+  height: calc(100vh - 64px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  padding: 24px 16px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #1f2937;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: center;
+}
+
+.sidebar li:hover {
+  background-color: #eef2ff;
+}
+
+.sidebar .active {
+  background-color: #6366f1;
+  color: white;
+  font-weight: 600;
+}
+
+/* Main Content */
+.profile-container {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.profile-left {
+  width: 260px;
+  text-align: center;
+}
+
+.profile-pic-large {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #6366f1;
+  margin-bottom: 10px;
+}
+
+.profile-badges {
+  margin-top: 16px;
+  color: black;
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.badge {
+  background-color: #eef2ff;
+  color: #6366f1;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Right Side Form */
+.profile-right {
+  flex: 1;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.profile-right h2 {
+  font-size: 22px;
+  color: #6366f1;
+  margin-bottom: 24px;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-details label {
+  font-weight: 500;
+}
+
+.profile-details input,
+.profile-details textarea,
+.profile-details select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.profile-details input:focus,
+.profile-details textarea:focus,
+.profile-details select:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+
+.profile-details textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Buttons */
+.edit-btn, .save-btn {
+  width: 160px;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.edit-btn {
+  background: #6366f1;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #4f46e5;
+  transform: scale(1.02);
+}
+
+.save-btn {
+  background: #10b981;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #059669;
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .profile-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    box-shadow: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .profile-container {
+    padding: 20px;
+  }
+
+  .profile-right {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .profile-pic-large {
+    width: 120px;
+    height: 120px;
+  }
+
+  .edit-btn,
+  .save-btn {
+    width: 100%;
+  }
+}

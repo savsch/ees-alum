@@ -1,0 +1,421 @@
+/* ======= General Page Styling ======= */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #0a0a0a, #1b1b1b);
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* ======= Home Container ======= */
+.home-container {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/background.webp") center/cover no-repeat;
+}
+
+/* ======= Hero Section ======= */
+.hero-section {
+    position: relative;
+    padding: 80px 20px;
+}
+
+.hero-section h1 {
+    font-size: 2.8rem;
+    color: white;
+    font-weight: 600;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    margin-bottom: 10px;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: #cccccc;
+}
+
+/* ======= Authentication Buttons ======= */
+.auth-buttons {
+    margin-top: 30px;
+}
+
+.login-btn, .alumni-btn, .logout-btn {
+    background: linear-gradient(45deg, #00eaff, #0077ff);
+    color: #ffffff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    margin: 10px;
+}
+
+.login-btn:hover, .alumni-btn:hover, .logout-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
+
+/* ======= Alumni Login & Registration Popup (Updated) ======= */
+.alumni-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+}
+
+.alumni-popup-content {
+    background: rgba(17, 17, 17, 0.95);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+    width: 350px;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #00eaff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 1);
+}
+
+/* Alumni Login Form */
+.alumni-popup-content h2 {
+    color: #00eaff;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+/* Input Fields */
+.alumni-popup-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: none;
+    background: rgba(34, 34, 34, 0.9);
+    color: white;
+    border-bottom: 2px solid #00eaff;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: 0.3s ease-in-out;
+}
+
+.alumni-popup-content input:focus {
+    outline: none;
+    background: rgba(44, 44, 44, 0.9);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+/* Submit & Toggle Buttons */
+.submit-btn, .toggle-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    background: linear-gradient(45deg, #00eaff, #0077ff);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.submit-btn:hover, .toggle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
+
+.toggle-btn {
+    background: none;
+    border: 1px solid #00eaff;
+    color: #00eaff;
+}
+
+.toggle-btn:hover {
+    background: #00eaff;
+    color: black;
+}
+
+/* Smooth Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ======= Footer Styling ======= */
+.footer {
+    background: #0a0a0a;
+    padding: 40px 20px;
+    border-top: 3px solid #00eaff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    color: white;
+    text-align: center;
+    position: relative;
+    margin-top: 50px;
+}
+
+/* ======= Footer Content Layout ======= */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ======= Footer Logo Styling ======= */
+.footer-logos {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo {
+    width: 200px;  
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+/* ======= Footer Links Section ======= */
+.footer-links {
+    flex: 2;
+    text-align: center;
+}
+
+.footer-links h3 {
+    font-size: 1.5rem;
+    color: #00eaff;
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links ul li {
+    display: inline;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.footer-links a:hover {
+    color: #00eaff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+/* ======= Bottom Footer Text ======= */
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #bbbbbb;
+}
+
+/* ======= Responsive Footer (Mobile Optimization) ======= */
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-logos {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+
+/* image slider */
+.image-carousel {
+    /* text-align: center;
+    padding: 50px 0;
+    height: 250px;
+    width: 95%; */
+    background: #0a0a0a;
+    border-top: 3px solid #00eaff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    color: white;
+    text-align: center;
+    position: relative;
+    
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;  /* Full width */
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s ease;
+}
+
+.carousel-image {
+    width: 33.33%;  /* Show 3 images at once, each takes 1/3 of the width */
+    height: auto;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.carousel-image.active {
+    opacity: 1;  /* Center image is fully visible */
+    transform: scale(1);  /* Center image is at normal scale */
+}
+
+.carousel-image.adjacent {
+    opacity: 0.5;  /* Adjacent images are dimmed */
+    transform: scale(0.8);  /* Adjacent images are slightly smaller */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+.image-carousel h1{
+    
+color: #00eaff;
+}
+
+.forgot-password-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
+
+.forgot-password-btn{
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    background: linear-gradient(45deg, #00eaff, #0077ff);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+/* ======= Password Reset Popup Styling ======= */
+.password-reset-popup {
+    margin-top: 20px;
+    background: rgba(25, 25, 25, 0.9);
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.password-reset-popup h2 {
+    font-size: 1.4rem;
+    color: #00eaff;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+}
+
+.password-reset-popup input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: rgba(34, 34, 34, 0.9);
+    border: none;
+    border-bottom: 2px solid #00eaff;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.password-reset-popup input:focus {
+    outline: none;
+    background: rgba(44, 44, 44, 0.95);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.password-reset-popup button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    background: linear-gradient(45deg, #00eaff, #0077ff);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.password-reset-popup button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
