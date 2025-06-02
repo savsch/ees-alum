@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect,useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import io from "socket.io-client";
@@ -23,10 +23,6 @@ function Chat() {
     const [chatList, setChatList] = useState([]);
     const navigate = useNavigate();
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-    const closeSidebar = () => setIsSidebarOpen(false);
-
     const hasAlertedRef = useRef(false);
 
     useEffect(() => {
@@ -39,15 +35,15 @@ function Chat() {
                 navigate("/");
             }
         });
-
+    
         if (alumni) {
             setUser({ displayName: alumni.name });
         }
-
+    
         return () => unsubscribe();
     }, []);
-
-
+    
+    
 
     useEffect(() => {
         if (!user && !alumni) return;
@@ -121,28 +117,11 @@ function Chat() {
 
         try {
             await axios.post(`${CHAT_API_URL}/send`, newMessage);
-
-            // Manually update chatList if receiver not already there
-            const exists = chatList.some(chat => chat.name === selectedChat);
-            if (!exists) {
-                setChatList(prev => [
-                    { name: selectedChat, lastMessage: newMessage },
-                    ...prev,
-                ]);
-                window.location.reload(); // Refresh the page
-
-            } else {
-                window.location.reload(); // Refresh the page
-
-                fetchChatList(); // Optional: update latest message
-            }
-
+            fetchChatList();
         } catch (err) {
             console.error("❌ Error sending message:", err);
         }
-
     };
-
 
     // ✅ Delete a specific message
     const deleteMessage = async (messageId) => {
@@ -173,23 +152,6 @@ function Chat() {
         }
     };
 
-    const deleteChatManually = async (targetName) => {
-        const senderName = user ? user.displayName : alumni?.name;
-        if (!senderName) return alert("Login required");
-
-        try {
-            await axios.delete(`${CHAT_API_URL}/delete-chat/${senderName}/${targetName}`);
-            setChatList(chatList.filter(chat => chat.name !== targetName));
-            if (selectedChat === targetName) {
-                setMessages([]);
-                setSelectedChat(null);
-            }
-        } catch (err) {
-            console.error("❌ Error deleting chat manually:", err);
-        }
-    };
-
-
     // ✅ Real-time update when a message is received
     useEffect(() => {
         socket.on("receive_message", (message) => {
@@ -205,18 +167,8 @@ function Chat() {
 
     return (
         <div className="chat-container">
-
-
-            {/* Hamburger (only visible on mobile) */}
-            <button className="hamburger-btn" onClick={toggleSidebar}>
-                ☰
-            </button>
-            {/* Overlay when sidebar is open on mobile */}
-            {isSidebarOpen && <div className="overlay" onClick={closeSidebar} />}
-
-
             {/* Sidebar */}
-            <div className={`chat-sidebar ${isSidebarOpen ? "open" : ""}`}>
+            <div className="chat-sidebar">
                 <h2>Your Chats</h2>
                 {chatList.length === 0 ? (
                     <p>No chats available</p>
@@ -229,37 +181,15 @@ function Chat() {
                                 onClick={() => {
                                     setSelectedChat(chat.name);
                                     fetchMessages(chat.name);
-                                    closeSidebar(); // 👈 Add this to auto-close after selecting
-
                                 }}
                             >
-                                <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
-                                    <div className="avatar">
-                                        {chat.name[0].toUpperCase()}
-                                    </div>
-                                    <div>
-                                        <strong>{chat.name}</strong>
-                                        {/* <p className="last-message">{chat.lastMessage ? chat.lastMessage.message : "No messages yet"}</p> */}
-                                    </div>
+                                <div>
+                                    <strong>{chat.name}</strong>
+                                    <p className="last-message">{chat.lastMessage ? chat.lastMessage.message : "No messages yet"}</p>
                                 </div>
-                                <button
-                                    className="delete-chat-sidebar-btn"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        const confirmDelete = window.confirm(`Delete chat with ${chat.name}?`);
-                                        if (confirmDelete) {
-                                            setSelectedChat(null);
-                                            deleteChatManually(chat.name);
-                                        }
-                                    }}
-                                    title="Delete chat"
-                                >
-                                    <FaTrashAlt />
-                                </button>
                             </li>
                         ))}
                     </ul>
-
                 )}
             </div>
 
@@ -282,31 +212,26 @@ function Chat() {
                         <div className="messages">
                             {messages.map((msg, idx) => (
                                 <div key={msg._id} className={msg.sender === (user ? user.displayName : alumni?.name) ? "sent" : "received"}>
-                                    <div className="message-text">
-                                        <strong>{msg.sender.split(" ")[0]}:</strong> {msg.message}
-                                    </div>
-                                    {msg.sender === (user ? user.displayName : alumni?.name) && (
-                                        <button className="delete-btn" onClick={() => deleteMessage(msg._id)} title="Delete message">
-                                            <FaTrashAlt />
-                                        </button>
-                                    )}
-                                </div>
+                                    <strong>{msg.sender.split(" ")[0]}:</strong> {msg.message}
 
+                                    {/* Show delete button only for sender */}
+                                    {msg.sender === (user ? user.displayName : alumni?.name) && (
+                                        <button className="delete-btn" onClick={() => deleteMessage(msg._id)}>
+                                            <FaTrashAlt />
+                                        </button>)}
+                                </div>
                             ))}
                         </div>
-                        <div className="message-input-container">
-                            <input
-                                type="text"
-                                value={messageInput}
-                                onChange={(e) => setMessageInput(e.target.value)}
-                                placeholder="Type a message..."
-                            />
-                            <button onClick={sendMessage}>Send</button>
-                        </div>
-
+                        <input
+                            type="text"
+                            value={messageInput}
+                            onChange={(e) => setMessageInput(e.target.value)}
+                            placeholder="Type a message..."
+                        />
+                        <button onClick={sendMessage}>Send</button>
                     </>
                 ) : (
-                    <p className="intro">Select a user to start chatting</p>
+                    <p>Select a user to start chatting</p>
                 )}
             </div>
         </div>
