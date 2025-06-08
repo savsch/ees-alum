@@ -15,7 +15,7 @@ import "../styles/navbar.css";
 
 
 function Navbar() {
-    //profile
+    // Profile state
     const [user, setUser] = useState(null);
     const [alumni, setAlumni] = useState(JSON.parse(localStorage.getItem("alumni")) || null);
     const navigate = useNavigate();
@@ -35,18 +35,18 @@ function Navbar() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+            setUser(currentUser); // Sets user (student) state
         });
-    
+
         const alumni = JSON.parse(localStorage.getItem("alumni"));
-        const name = alumni?.name || JSON.parse(localStorage.getItem("user"))?.displayName;
-    
-        if (name) {
-            fetch(`${import.meta.env.VITE_API_BASE_URL}/profile/${name}`)
-            .then(res => res.json())
+        setAlumni(alumni); // Sets alumni state
+
+        if (alumni && alumni.name) {
+            // If alumni is present, fetch the profile picture from the server
+            fetch(`${import.meta.env.VITE_API_BASE_URL}/profile/${alumni.name}`)
+                .then(res => res.json())
                 .then(data => {
                     if (data.profilePic) {
                         setProfilePic(`${import.meta.env.VITE_API_BASE_URL}/uploads/${data.profilePic}`);
@@ -54,15 +54,15 @@ function Navbar() {
                 })
                 .catch(err => console.error("❌ Failed to fetch profile picture", err));
         }
-    
+
         return () => unsubscribe();
     }, []);
-    
 
     // ✅ Handle Profile Click (Redirect Logic)
     const handleProfileClick = () => {
         setShowDropdown(!showDropdown);
     };
+
     const handleLogout = async () => {
         if (user) {
             await signOut(auth);
@@ -73,10 +73,12 @@ function Navbar() {
             setAlumni(null);
         }
         navigate("/");
+
     };
-
-
-
+    const handleNavClick = (e, path) => {
+        e.preventDefault();
+        window.location.href = path;
+    };
 
 
     return (
@@ -89,26 +91,40 @@ function Navbar() {
 
             {/* Navigation Links */}
             <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-  <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink></li>
-  <li><NavLink to="/events" className={({ isActive }) => isActive ? "active" : ""}>Events</NavLink></li>
-  <li><NavLink to="/forum" className={({ isActive }) => isActive ? "active" : ""}>Forum</NavLink></li>
-  <li><NavLink to="/alumni" className={({ isActive }) => isActive ? "active" : ""}>Alumni</NavLink></li>
-  <li><NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""}>Contact</NavLink></li>
-  <li><NavLink to="/chat" className={({ isActive }) => isActive ? "active" : ""}>Chat</NavLink></li>
-</ul>
-<img
-    src={profilePic}
-    alt="Profile"
-    className="profile-icon"
-    onClick={handleProfileClick}
-/>
+                <li><NavLink
+                    to="/"
+                    className={({ isActive }) => isActive ? "active" : ""}
+                    onClick={(e) => handleNavClick(e, "/")}
+                >
+                    Home
+                </NavLink></li>
+                <li><NavLink to="/events" className={({ isActive }) => isActive ? "active" : ""} onClick={(e) => handleNavClick(e, "/events")}>Events</NavLink></li>
+                <li><NavLink to="/forum" className={({ isActive }) => isActive ? "active" : ""} onClick={(e) => handleNavClick(e, "/forum")}>Forum</NavLink></li>
+                <li><NavLink to="/alumni" className={({ isActive }) => isActive ? "active" : ""} onClick={(e) => handleNavClick(e, "/alumni")}>Alumni</NavLink></li>
+                <li><NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""} onClick={(e) => handleNavClick(e, "/contact")}>Contact</NavLink></li>
+                <li><NavLink to="/chat" className={({ isActive }) => isActive ? "active" : ""} onClick={(e) => handleNavClick(e, "/chat")}>Chat</NavLink></li>
+            </ul>
 
-                {showDropdown && (
-                    <div className="profile-dropdown" ref={dropdownRef}>
-                        <p onClick={() => { navigate("/profile"); setShowDropdown(false); }}>👤 View Profile</p>
-                        <p onClick={handleLogout}>🚪 Logout</p>
-                    </div>
-                )}
+            {/* Render profile icon if either user (student) or alumni is logged in */}
+            {(user || alumni) && (
+                <>
+                    <img
+                        src={profilePic}
+                        alt="Profile"
+                        className="profile-icon"
+                        onClick={handleProfileClick}
+
+                    />
+
+                    {showDropdown && (
+                        <div className="profile-dropdown" ref={dropdownRef}>
+                            <p onClick={() => { window.location.href = "/profile"; setShowDropdown(false); }}>👤 View Profile</p>
+                            <p onClick={handleLogout} >🚪 Logout</p>
+                        </div>
+                    )}
+                </>
+            )}
+
             {/* Hamburger Menu Toggle (For Mobile) */}
             <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
                 <div className="bar"></div>
@@ -118,16 +134,18 @@ function Navbar() {
 
             {/* Mobile Dropdown Menu */}
             <div className={`mobile-menu ${menuOpen ? "active" : ""}`}>
-  <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""} onClick={() => setMenuOpen(false)}>Home</NavLink>
-  <NavLink to="/events" className={({ isActive }) => isActive ? "active" : ""} onClick={() => setMenuOpen(false)}>Events</NavLink>
-  <NavLink to="/forum" className={({ isActive }) => isActive ? "active" : ""} onClick={() => setMenuOpen(false)}>Forum</NavLink>
-  <NavLink to="/alumni" className={({ isActive }) => isActive ? "active" : ""} onClick={() => setMenuOpen(false)}>Alumni</NavLink>
-  <NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""} onClick={() => setMenuOpen(false)}>Contact</NavLink>
-  <NavLink to="/chat" className={({ isActive }) => isActive ? "active" : ""} onClick={() => setMenuOpen(false)}>Chat</NavLink>
-</div>
+                <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""} onClick={() => { setMenuOpen(false); window.location.href = "/" }}>Home</NavLink>
+                <NavLink to="/events" className={({ isActive }) => isActive ? "active" : ""} onClick={() => { setMenuOpen(false); window.location.href = "/events" }}>Events</NavLink>
+                <NavLink to="/forum" className={({ isActive }) => isActive ? "active" : ""} onClick={() => { setMenuOpen(false); window.location.href = "/forum" }}>Forum</NavLink>
+                <NavLink to="/alumni" className={({ isActive }) => isActive ? "active" : ""} onClick={() => { setMenuOpen(false); window.location.href = "/alumni" }}>Alumni</NavLink>
+                <NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""} onClick={() => { setMenuOpen(false); window.location.href = "/contact" }}>Contact</NavLink>
+                <NavLink to="/chat" className={({ isActive }) => isActive ? "active" : ""} onClick={() => { setMenuOpen(false); window.location.href = "/chat" }}>Chat</NavLink>
+            </div>
+
 
         </nav>
     );
 }
 
 export default Navbar;
+
