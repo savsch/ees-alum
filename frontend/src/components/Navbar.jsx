@@ -105,7 +105,7 @@ function Navbar() {
 
                 {showDropdown && (
                     <div className="profile-dropdown" ref={dropdownRef}>
-                        <p onClick={() => { navigate("/profile"); setShowDropdown(false); }}>👤 View Profile</p>
+                        <p onClick={() => { navigate("/profile"); setShowDropdown(false); }}>👤Profile</p>
                         <p onClick={handleLogout}>🚪 Logout</p>
                     </div>
                 )}
